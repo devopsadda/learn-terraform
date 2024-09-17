@@ -71,6 +71,26 @@ Important Note:
 - Terraform tries to ensure that the deployed infrastructure is based on the desired state
 - If there is a difference between the two, terraform plan presents a description of the changes necessary to achieve the desired state.
 
+### What is Resource Attributes?
+### How you will do Cross Resource Attribute Refrences
+```terraform
+resource "aws_eip" "eip" {
+  instance = aws_instance.demo-ec2.id
+  domain   = "vpc"
+}
+
+resource "aws_vpc_security_group_ingress_rule" "allow_tls_ipv4" {
+  security_group_id = aws_security_group.allow_tls.id
+  cidr_ipv4         = "${aws_eip.eip.public_ip}/32"
+  from_port         = 80
+  ip_protocol       = "tcp"
+  to_port           = 80
+}
+```
+
+### String Interpolation in Terraform
+![alt text](image-2.png)
+
 ## Hands On Labs
 ## POC Solutions/Projects
 ## Interview QA
