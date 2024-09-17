@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "us-east-1"
+  profile = "cloud-adm"
 }
 resource "aws_instance" "demo-ec2" {
   ami = "ami-066784287e358dad1"

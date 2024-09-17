@@ -1,18 +1,49 @@
 # Learn and Build using Terraform
-## Learning notes - Concepts 
+## Learning notes
 
 ### Authentication and Authorization
 - Authentication is the process of verifying who a user is.
 - Authorization is the process of verifying what access they have.
 
-#### Different way you can use credentials for AWS Provider
+#### Different ways you can use credentials for AWS Provider
 ```terraform
+$ cat ~/.aws/config
+[default]
+region = us-east-1
+[profile cloud-adm]
+region = us-east-1
+
 provider "aws" {
-    region      = "***********************"
+  region = "us-east-1"
+}
+
+provider "aws" {
+    region      = "us-east-1"
     access_key  = "***********************"
     secret_key  = "***********************"
 }
+
+provider "aws" {
+  profile = "cloud-adm"
+}
 ```
+### Basic Concepts to Remember
+- Providers:
+    - A provider is a plugin that lets terraform manage an external APIs.
+    - When we run terraform init, plugins required for the provider are automatically downloaded and saved locally to a .terraform directory.
+
+- Resource:
+    - Resource block describes one or more infrastructure objects associated with the provider.
+    - Ex: 
+        ○ resource aws_instance
+        ○ resource aws_alb
+        ○ resource iam_user
+    - A resource block declares a resource of a given type ("aws_instance") with a given local name ("demo-ec2")
+    - Resource type and name together serve as a Identifier for a given resource and so must be unique.
+- Provider tiers:
+    - Official
+    - Partner
+    - Community
 
 terraform init: Go ahead and download appropriate plugin associated with the provider.
 
