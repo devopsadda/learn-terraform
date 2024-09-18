@@ -81,15 +81,16 @@ resource "aws_eip" "eip" {
 
 resource "aws_vpc_security_group_ingress_rule" "allow_tls_ipv4" {
   security_group_id = aws_security_group.allow_tls.id
-  cidr_ipv4         = "${aws_eip.eip.public_ip}/32"
+  cidr_ipv4         = "${aws_eip.eip.public_ip}/32"          # String Interpolation in Terraform
   from_port         = 80
   ip_protocol       = "tcp"
   to_port           = 80
 }
 ```
+### Terraform Variables
+- Terraform variable definition file (TFVARS)
 
-### String Interpolation in Terraform
-![alt text](image-2.png)
+
 
 ## Hands On Labs
 ## POC Solutions/Projects
